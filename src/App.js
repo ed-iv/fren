@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Fren from './components/Fren';
+import { left, right } from './positions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () => {
+    const [position, setPosition] = useState(left);
+    
+    const togglePos = ({keyCode}) =>  {
+        const newPos = position === left ? right : left;
+        setPosition(newPos);
+    };
+
+    return (
+                
+            <div
+                style={{ backgroundColor: "#848052" }}
+                className="focus:outline-none flex flex-col items-center justify-center h-screen w-screen cursor-pointer"
+                onClick={(e) => togglePos(e)}
+            >   
+                <div 
+                    className="select-none font-mono text-lg text-black text-opacity-60"
+                >
+                    click frantically to bob and weave!
+                </div>    
+                <Fren                                   
+                    currPosition={position}
+                />
+            
+        </div>
+    );
+
 }
 
 export default App;
